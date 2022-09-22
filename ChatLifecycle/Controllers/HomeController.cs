@@ -131,16 +131,23 @@ namespace ChatLifecycle.Controllers
         {
             var graphClient = GraphClient.GetGraphClient(token);
             //chatType eq 'meeting' or chatType eq 'group'
-            IGraphServiceChatsCollectionPage chatsTask =  await graphClient.Chats.Request().Filter("chatType eq 'meeting' or chatType eq 'group'").Expand("members").GetAsync();
 
-            List<string> chats = new List<string>();
-            foreach(var chat in chatsTask.CurrentPage)
+            List<string> groupNames = new List<string>();
+            var request = graphClient.Chats.Request().Filter("chatType eq 'meeting' or chatType eq 'group'").Expand("members");
+            while (request != null)
             {
-                var found = chat.Members.CurrentPage.Select(member => (AadUserConversationMember) member).Any(member => member.UserId == otherUserId);
-                if (found) chats.Add(chat.Topic);
-            }    
+                var chatsResponse = await request.GetAsync();
 
-            return JsonConvert.SerializeObject(chats);
+                foreach (var chat in chatsResponse.CurrentPage)
+                {
+                    var found = chat.Members.CurrentPage.Select(member => (AadUserConversationMember)member).Any(member => member.UserId == otherUserId);
+                    if (found) groupNames.Add(chat.Topic);
+                }
+
+                request = chatsResponse.NextPageRequest;
+            }
+
+            return JsonConvert.SerializeObject(groupNames);
         }
 
         public async void CreateGroupChat(GraphServiceClient graphClient, string[] members, string userID, string title)
