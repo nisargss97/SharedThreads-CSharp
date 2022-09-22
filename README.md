@@ -13,6 +13,11 @@ extensions:
 urlFragment: officedev-microsoft-teams-samples-graph-chat-lifecycle-csharp
 ---
 
+
+# Sample (Groups in common)
+![image](https://user-images.githubusercontent.com/22473969/191633495-38c8aa05-ed6a-4142-a1ae-436ff58e3144.png)
+
+
 # Chat LifeCycle Application
 
 This sample illustrates Lifecycle of chat in Teams (Creating chat, adding members with all scenarios, deleting member).
@@ -119,5 +124,4 @@ This sample illustrates Lifecycle of chat in Teams (Creating chat, adding member
 3. Also, Polly app will be installed to the created group chat and will be pinned to the chat.
 
   ![image](https://user-images.githubusercontent.com/80379013/120188506-d5bd3680-c233-11eb-97fc-9029385e6458.png)
-
 
