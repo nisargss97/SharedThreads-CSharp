@@ -25,9 +25,8 @@
 <div id="divError" style="display: none"></div>
 <button onclick="requestConsent()" id="consent" style="display: none">Authenticate</button>
 <div id="divGraphProfile" style="display: none"></div>
-<h4 id="successMsg"></h4>
 <button class="button-primary" id="adaptiveBtn" style="display: none">Find groups in common</button>
-<div id="Groups"></div>
+<h4 id="Groups"></h4>
 <script>
 
     microsoftTeams.app.initialize();
@@ -92,8 +91,7 @@
 
     function showSuccessMessage(response)
     {
-       document.getElementById("successMsg").innerHTML=response;
+       document.getElementById("Groups").innerHTML=response;
     }
-
-
+    
 </script>

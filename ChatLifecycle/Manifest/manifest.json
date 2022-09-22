@@ -27,13 +27,13 @@
     {
       "entityId": "auth",
       "name": "Auth",
-      "contentUrl": "https://2998-2001-4898-80e8-a-60da-8830-1553-aad7.ngrok.io/Home/Index",
+      "contentUrl": "https://5f32-2001-4898-80e8-8-64d4-506a-e9d8-110f.ngrok.io/Home/Index",
       "scopes": [ "personal" ]
     }
   ],
   "configurableTabs": [
     {
-      "configurationUrl": "https://2998-2001-4898-80e8-a-60da-8830-1553-aad7.ngrok.io/Home/Configure",
+      "configurationUrl": "https://5f32-2001-4898-80e8-8-64d4-506a-e9d8-110f.ngrok.io/Home/Configure",
       "canUpdateConfiguration": true,
       "scopes": [
         "team"
@@ -42,10 +42,10 @@
   ],
   "permissions": [ "identity", "messageTeamMembers" ],
   "validDomains": [
-    "https://2998-2001-4898-80e8-a-60da-8830-1553-aad7.ngrok.io"
+    "https://5f32-2001-4898-80e8-8-64d4-506a-e9d8-110f.ngrok.io"
   ],
   "webApplicationInfo": {
     "id": "a2fd74ea-03db-4869-a039-ff08b6c95f01",
-    "resource": "api://2998-2001-4898-80e8-a-60da-8830-1553-aad7.ngrok.io/a2fd74ea-03db-4869-a039-ff08b6c95f01"
+    "resource": "api://5f32-2001-4898-80e8-8-64d4-506a-e9d8-110f.ngrok.io/a2fd74ea-03db-4869-a039-ff08b6c95f01"
   }
 }
