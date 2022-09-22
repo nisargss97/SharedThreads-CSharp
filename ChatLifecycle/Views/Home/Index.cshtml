@@ -30,7 +30,6 @@
 <script>
 
     microsoftTeams.app.initialize();
-
     //retrieve accessToken from localstorage saved in auth.js file
     var token = localStorage.getItem("accessToken");
 
@@ -69,7 +68,7 @@
                 var userID = context.user.id;
                 var Json = JSON.stringify(result);
                 var parsedJson = JSON.parse(Json);
-                var resultJson = parsedJson.users;
+                var resultJson = parsedJson.peoplepicker;
 
                 $.ajax({
                     type: 'POST',
@@ -93,5 +92,5 @@
     {
        document.getElementById("Groups").innerHTML=response;
     }
-    
+
 </script>

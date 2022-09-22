@@ -7,62 +7,19 @@
       "type": "TextBlock",
       "size": "Medium",
       "weight": "Bolder",
-      "text": "Find groups in common"
+      "text": "Select members"
     },
     {
-      "type": "ColumnSet",
-      "columns": [
-        {
-          "type": "Column",
-          "items": [
-            {
-              "type": "TextBlock",
-              "weight": "Bolder",
-              "text": "Select Member: ",
-              "wrap": true
-            }
-          ],
-          "width": "auto"
-        },
-        {
-          "type": "Column",
-          "items": [
-            {
-              "type": "Input.ChoiceSet",
-              "id": "users",
-              "style": "compact",
-              "isMultiSelect": false,
-              "value": "",
-              "choices": [
-                {
-                  "title": "${user1Title}",
-                  "value": "${user1Value}"
-                },
-                {
-                  "title": "${user2Title}",
-                  "value": "${user2Value}"
-                },
-                {
-                  "title": "${user3Title}",
-                  "value": "${user3Value}"
-                },
-                {
-                  "title": "${user4Title}",
-                  "value": "${user4Value}"
-                },
-                {
-                  "title": "${user5Title}",
-                  "value": "${user5Value}"
-                },
-                {
-                  "title": "${user6Title}",
-                  "value": "${user6Value}"
-                }
-              ]
-            }
-          ]
-        }
-      ]
+      "type": "Input.ChoiceSet",
+      "style": "filtered",
+      "id": "peoplepicker",
+      "isMultiSelect": false,
+      "value": "",
+      "choices": [],
+      "choices.data": {
+        "type": "Data.Query",
+        "dataset": "graph.microsoft.com/users"
+      }
     }
 
   ],
