@@ -1,0 +1,131 @@
+{
+  "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+  "type": "AdaptiveCard",
+  "version": "1.0",
+  "body": [
+    {
+      "type": "ColumnSet",
+      "columns": [
+        {
+          "type": "ColumnSet",
+          "columns": [
+            {
+              "type": "Column",
+              "items": [
+                {
+                  "type": "TextBlock",
+                  "weight": "Bolder",
+                  "text": "Select Members: ",
+                  "wrap": true
+                }
+              ],
+              "width": "auto"
+            },
+            {
+              "type": "Column",
+              "items": [
+                {
+                  "type": "Input.ChoiceSet",
+                  "id": "users",
+                  "style": "compact",
+                  "isMultiSelect": false,
+                  "value": "",
+                  "choices": [
+                    {
+                      "title": "${user1Title}",
+                      "value": "${user1Value}"
+                    },
+                    {
+                      "title": "${user2Title}",
+                      "value": "${user2Value}"
+                    },
+                    {
+                      "title": "${user3Title}",
+                      "value": "${user3Value}"
+                    },
+                    {
+                      "title": "${user4Title}",
+                      "value": "${user4Value}"
+                    },
+                    {
+                      "title": "${user5Title}",
+                      "value": "${user5Value}"
+                    },
+                    {
+                      "title": "${user6Title}",
+                      "value": "${user6Value}"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "ColumnSet",
+          "columns": [
+            {
+              "type": "Column",
+              "items": [
+                {
+                  "type": "TextBlock",
+                  "weight": "Bolder",
+                  "text": "",
+                  "wrap": true,
+                  "height": "stretch"
+                }
+              ],
+              "width": "stretch"
+            }
+          ]
+        },
+        {
+          "type": "ColumnSet",
+          "columns": [
+            {
+              "type": "Column",
+              "items": [
+                {
+                  "type": "TextBlock",
+                  "weight": "Bolder",
+                  "text": "",
+                  "wrap": true,
+                  "height": "stretch"
+                }
+              ],
+              "width": "stretch"
+            }
+          ]
+        },
+        {
+          "type": "ColumnSet",
+          "columns": [
+            {
+              "type": "Column",
+              "items": [
+                {
+                  "type": "TextBlock",
+                  "text": "**Note**: Common group with the selected member will be displayed.",
+                  "height": "stretch",
+                  "wrap": true
+                }
+              ],
+              "width": "stretch"
+            }
+          ]
+        }
+      ],
+      "actions": [
+        {
+          "type": "Action.Submit",
+          "title": "Submit",
+          "card": {
+            "version": 1.0,
+            "type": "AdaptiveCard",
+            "$schema": "http://adaptivecards.io/schemas/adaptive-card.json"
+          }
+        }
+      ]
+    }
+  ]
+}

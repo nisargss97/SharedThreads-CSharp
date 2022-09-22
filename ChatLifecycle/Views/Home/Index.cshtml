@@ -1,0 +1,99 @@
+﻿
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<script src='https://res.cdn.office.net/teams-js/2.0.0/js/MicrosoftTeams.min.js'></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+
+<style>
+    #adaptiveBtn {
+        border: 1px solid #e5e5e5;
+        border-radius: 10px;
+        margin: 15px;
+        font-size: 16px;
+        background-color: #50B8CD;
+        padding: 8px;
+        cursor: pointer;
+        font-weight: bold;
+    }
+</style>
+
+<h3>Welcome to Chat LifeCycle Application!!</h3>
+<h4 id="subTitle" style="display: none">Please click on the button to find groups in common!</h4>
+<div id="divError" style="display: none"></div>
+<button onclick="requestConsent()" id="consent" style="display: none">Authenticate</button>
+<div id="divGraphProfile" style="display: none"></div>
+<h4 id="successMsg"></h4>
+<button class="button-primary" id="adaptiveBtn" style="display: none">Find groups in common</button>
+<div id="Groups"></div>
+<script>
+
+    microsoftTeams.app.initialize();
+
+    //retrieve accessToken from localstorage saved in auth.js file
+    var token = localStorage.getItem("accessToken");
+
+    $("#adaptiveBtn").on('click', function (e) {
+
+            let taskInfo = {
+            title: null,
+            height: null,
+            width: null,
+            url: null,
+            card: null,
+            fallbackUrl: null,
+            completionBotId: null,
+            };
+
+            $.ajax({
+                    url:'@Url.Action("GetAdaptiveCard", "Home")',
+                    type: 'POST',
+                    dataType: "json",
+                    data:{token: token},
+                    success: function (data, textStatus, jQxhr) {
+                        console.log(data);
+                        taskInfo.card = data;
+                        microsoftTeams.tasks.startTask(taskInfo,submitHandler);
+                    },
+                    error: function (jqXhr, textStatus, errorThrown) {
+                        console.log('error', errorThrown);
+                    }
+                });
+            })
+
+    submitHandler = (err,result) => {
+        microsoftTeams.app.initialize().then(() => {
+            microsoftTeams.app.getContext().then((context) => {
+
+                var userID = context.user.id;
+                var Json = JSON.stringify(result);
+                var parsedJson = JSON.parse(Json);
+                var resultJson = parsedJson.users;
+
+                $.ajax({
+                    type: 'POST',
+                    url: '/GetChats',
+                    dataType: 'json',
+                    data: { token: token, otherUserId: resultJson, userID: userID},
+                    success: function(response) {
+                        console.log(response);
+                        showSuccessMessage(response);
+                    },
+                    error: function (xhr, textStatus, errorThrown) {
+                        console.log("textStatus: " + textStatus + ", errorThrown:" + errorThrown);
+                        console.log(resultJson);
+                    },
+                });
+            });
+        });
+    };
+
+    function showSuccessMessage(response)
+    {
+       document.getElementById("successMsg").innerHTML=response;
+    }
+
+
+</script>
