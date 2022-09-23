@@ -26,7 +26,7 @@
 <button onclick="requestConsent()" id="consent" style="display: none">Authenticate</button>
 <div id="divGraphProfile" style="display: none"></div>
 <button class="button-primary" id="adaptiveBtn" style="display: none">Find groups in common</button>
-<h4 id="Groups"></h4>
+<div id="demo"></div>
 <script>
 
     microsoftTeams.app.initialize();
@@ -90,7 +90,24 @@
 
     function showSuccessMessage(response)
     {
-       document.getElementById("Groups").innerHTML=response;
+
+
+        var dataHtml = '<table><tr><th>Group Name</th><th> Last Updated </th></tr>';
+
+
+
+        for (let i = 0; i < response.length; i++) {
+            dataHtml += '<tr><td><a href="' + response[i].url + '" target="_blank">' + response[i].name + '</a></td>';
+            dataHtml += '<td>' + response[i].formatedLastUpdated + '</td></tr>';
+        };
+
+
+
+        dataHtml += '</table>';
+
+
+
+        document.getElementById("demo").innerHTML = dataHtml
     }
 
 </script>

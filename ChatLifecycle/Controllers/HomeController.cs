@@ -127,13 +127,14 @@ namespace ChatLifecycle.Controllers
         }
 
         [Route("GetChats")]
-        public async Task<string> GetChats(string token, string otherUserId, string userID, string title)
+        public async Task<List<ChatItem>> GetChats(string token, string otherUserId, string userID, string title)
         {
             var graphClient = GraphClient.GetGraphClient(token);
-            //chatType eq 'meeting' or chatType eq 'group'
 
-            List<string> groupNames = new List<string>();
+            List<ChatItem> chatList = new List<ChatItem>();
             var request = graphClient.Chats.Request().Filter("chatType eq 'meeting' or chatType eq 'group'").Expand("members");
+            String format = "MM/dd/yyyy hh:mm:ss";
+
             while (request != null)
             {
                 var chatsResponse = await request.GetAsync();
@@ -141,13 +142,25 @@ namespace ChatLifecycle.Controllers
                 foreach (var chat in chatsResponse.CurrentPage)
                 {
                     var found = chat.Members.CurrentPage.Select(member => (AadUserConversationMember)member).Any(member => member.UserId == otherUserId);
-                    if (found) groupNames.Add(chat.Topic);
+                    if (found)
+                    {
+                        object url = "";
+                        chat.AdditionalData.TryGetValue("webUrl", out url);
+                        var datetime = chat.LastUpdatedDateTime?.ToLocalTime().ToString(format);
+                        chatList.Add(new ChatItem
+                        {
+                            Id = chat.Id,
+                            Name = chat.Topic,
+                            FormatedLastUpdated = datetime,
+                            LastUpdated = chat.LastUpdatedDateTime ?? DateTimeOffset.Now,
+                            URL = (string)url
+                        });
+                    }
                 }
-
                 request = chatsResponse.NextPageRequest;
             }
-
-            return JsonConvert.SerializeObject(groupNames);
+            chatList.Sort();
+            return chatList;
         }
 
         public async void CreateGroupChat(GraphServiceClient graphClient, string[] members, string userID, string title)
