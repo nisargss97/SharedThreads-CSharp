@@ -11,12 +11,12 @@
     "termsOfUseUrl": "https://www.microsoft.com/termsofuse"
   },
   "name": {
-    "short": "Chat Lifecycle App",
-    "full": "Chat Lifecycle App"
+    "short": "Groups in Common",
+    "full": "Groups in Common"
   },
   "description": {
-    "short": "Chat Lifecycle Application",
-    "full": "Chat Lifecycle Application for showing all the scopes of adding users and installing polly app."
+    "short": "Find groups in common with anyone on Teams.",
+    "full": "Have you ever forgotten what was the chat thread where you spoke to a certain person about a project but cant find that thread because its buried deep in the list? Introducing Groups in common, just search for the person and find all the chats you have shared with them.\""
   },
   "icons": {
     "outline": "outline.png",
