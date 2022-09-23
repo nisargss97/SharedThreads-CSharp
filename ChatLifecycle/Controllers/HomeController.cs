@@ -129,6 +129,17 @@ namespace ChatLifecycle.Controllers
         [Route("GetChats")]
         public async Task<List<ChatItem>> GetChats(string token, string otherUserId, string userID, string title)
         {
+            string[] members = { };
+            if (otherUserId.Contains(','))
+            {
+                members = otherUserId.Split(',');
+            }
+            else
+            {
+                members = new[] { otherUserId };
+            }
+            List<string> memberList = new List<string>(members);
+
             var graphClient = GraphClient.GetGraphClient(token);
 
             List<ChatItem> chatList = new List<ChatItem>();
@@ -141,7 +152,9 @@ namespace ChatLifecycle.Controllers
 
                 foreach (var chat in chatsResponse.CurrentPage)
                 {
-                    var found = chat.Members.CurrentPage.Select(member => (AadUserConversationMember)member).Any(member => member.UserId == otherUserId);
+                    var aadMembers = chat.Members.CurrentPage.Select(member => (AadUserConversationMember)member).Select(member => member.UserId);
+                    var found = memberList.All(member => aadMembers.Contains(member));
+//                    found = chat.Members.CurrentPage.Select(member => (AadUserConversationMember)member).Any(member => member.UserId == otherUserId);
                     if (found)
                     {
                         object url = "";

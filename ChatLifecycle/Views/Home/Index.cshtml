@@ -20,13 +20,13 @@
     }
 </style>
 
-<h3>Welcome to Chat LifeCycle Application!!</h3>
+<div id="demo"></div>
+
 <h4 id="subTitle" style="display: none">Please click on the button to find groups in common!</h4>
 <div id="divError" style="display: none"></div>
 <button onclick="requestConsent()" id="consent" style="display: none">Authenticate</button>
 <div id="divGraphProfile" style="display: none"></div>
 <button class="button-primary" id="adaptiveBtn" style="display: none">Find groups in common</button>
-<div id="demo"></div>
 <script>
 
     microsoftTeams.app.initialize();
@@ -69,7 +69,7 @@
                 var Json = JSON.stringify(result);
                 var parsedJson = JSON.parse(Json);
                 var resultJson = parsedJson.peoplepicker;
-
+                console.log(Json);
                 $.ajax({
                     type: 'POST',
                     url: '/GetChats',
@@ -91,8 +91,8 @@
     function showSuccessMessage(response)
     {
 
-
-        var dataHtml = '<table><tr><th>Group Name</th><th> Last Updated </th></tr>';
+        var dataHtml = '<h4> Your groups in common</h4>'
+        dataHtml += '<table><tr><th>Group Name</th><th> Last Updated </th></tr>';
 
 
 

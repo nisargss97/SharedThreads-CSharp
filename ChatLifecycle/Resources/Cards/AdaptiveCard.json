@@ -13,7 +13,7 @@
       "type": "Input.ChoiceSet",
       "style": "filtered",
       "id": "peoplepicker",
-      "isMultiSelect": false,
+      "isMultiSelect": true,
       "value": "",
       "choices": [],
       "choices.data": {
